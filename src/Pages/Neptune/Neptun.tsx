@@ -2,6 +2,6 @@ import React from 'react'
 
 export const Neptun = () => {
     return (
-        <div>Neptun</div>
+        <div><h1 style={{ color: 'white' }}>neptun</h1></div>
     )
 }
