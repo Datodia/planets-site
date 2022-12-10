@@ -2,26 +2,16 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useState } from 'react';
 import { BurgerProps } from "../Interfaces";
+import { numbers } from "../Arrays";
 
-export const Navbar = ({ setOverview, setStructure, setSurface, setSurfaceTxt }: any) => {
+export const Navbar = ({ setOverview, setStructure, setSurface, setSurfaceTxt }: {
+    setOverview: React.Dispatch<React.SetStateAction<boolean>>;
+    setStructure: React.Dispatch<React.SetStateAction<boolean>>;
+    setSurface: React.Dispatch<React.SetStateAction<boolean>>;
+    setSurfaceTxt: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
     const [show, setShow] = useState<boolean>(false)
     const [active, setActive] = useState<number>(1)
-
-
-    const numbers = [
-        {
-            num: 1,
-            name: 'OVERVIEW'
-        },
-        {
-            num: 2,
-            name: 'STRUCTURE'
-        },
-        {
-            num: 3,
-            name: 'SURFACE'
-        }
-    ]
 
     const handleClick2 = (item: { num: number, name: string }) => {
         setActive(item.num)
@@ -45,16 +35,10 @@ export const Navbar = ({ setOverview, setStructure, setSurface, setSurfaceTxt }:
 
     const Owerview = numbers.map((item) => {
         return (
-
             <OverViewTxt
                 style={{ color: active === item.num ? 'white' : 'gray', borderBottom: active === item.num ? '3px solid red' : 'none' }}
                 onClick={() => handleClick2(item)}
             >{item.name}</OverViewTxt>
-            // <OverViewTxt
-            //     style={{ color: active === item.num ? 'white' : 'gray', borderBottom: active === item.num ? '3px solid red' : 'none' }}
-            //     onClick={() => setActive(item.num)}
-            // >{item.name}</OverViewTxt>
-
         )
     })
 
@@ -134,10 +118,14 @@ export const Navbar = ({ setOverview, setStructure, setSurface, setSurfaceTxt }:
             <Wrapper>
                 <Title>The Planets</Title>
                 <Links>
-                    <LINK to={"/"}>Mercur</LINK>
-                    <LINK to={"/venus"}>Vener</LINK>
-                    {/* <LINK to={"/earth"}>Marth</LINK>
-                <LINK to={"/marth"}>Mars</LINK> */}
+                    <LINK to={"/"}>MERCUR</LINK>
+                    <LINK to={"/venus"}>VENUS</LINK>
+                    <LINK to={"/earth"}>EARTH</LINK>
+                    <LINK to={"/marth"}>MARS</LINK>
+                    <LINK to={"/jupiter"}>JUPITER</LINK>
+                    <LINK to={"/saturn"}>SATURN</LINK>
+                    <LINK to={"/uranus"}>URANUS</LINK>
+                    <LINK to={"/neptune"}>NEPRUNE</LINK>
                 </Links>
                 <Button onClick={handleClick}><Img src="assets/icon-hamburger.svg" /></Button>
                 {show ?
@@ -192,14 +180,20 @@ const Wrapper2 = styled.div`
 
 const Links = styled.div`
     display: none;
+    width: 100%;
     @media screen and (min-width: 700px){
+        margin-top: 35px;
         display: flex;
+        justify-content: space-between;
     }
 `
 
 const LINK = styled(Link)`
     color: red;
-    font-size: 30px;
+    font-size: 11px;
+    font-family: 'League Spartan';
+    color: #838391;
+    font-weight: 700;
     text-decoration: none;
     /* display: none; */
 `
@@ -226,9 +220,8 @@ const Img = styled.img`
 
 const Burger = styled.div`
     margin-top: 53px;
-    height: 88vh;
+    height: 120vh;
     width: 100%;
-    border: 2px solid red;
     position: absolute;
     z-index: 10;
     padding-top: 24px;
@@ -242,11 +235,10 @@ const BurgLink = styled(Link)`
         display: flex;
         justify-content: space-between;
         align-items: center;
-        /* padding: 46px 32px 0 24px; */
         padding-bottom: 15px;
         text-decoration: none;
-        border-bottom: 1px solid #FFFFFF;
-        margin: 20px 32px;
+        border-bottom: 1px solid #838391;
+        margin: 20px 0;
 `
 const PlanetDiv = styled.div`
     display: flex;
@@ -262,7 +254,8 @@ const Planet = styled.div`
 const PlanetName = styled.h1`
     font-size: 15px;
     color: white;
-    font-weight: 700;
+    font-family: 'League Spartan';
+    font-weight: 400;
     letter-spacing: 1.36px;
 `
 

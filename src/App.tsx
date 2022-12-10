@@ -30,14 +30,25 @@ function App() {
           setSurfaceTxt={setSurfaceTxt}
         />
         <Routes>
-          <Route path='/' element={<Mercur overview={overview} structure={strucrute} surface={surface} surfaceTxt={surfaceTxt} />} />
-          <Route path='/venus' element={<Venus />} />
-          <Route path='/earth' element={<Earth />} />
-          <Route path='/marth' element={<Marth />} />
-          <Route path='/jupiter' element={<Jupert />} />
-          <Route path='/saturn' element={<Saturn />} />
-          <Route path='/uranus' element={<Uran />} />
-          <Route path='/neptune' element={<Neptun />} />
+          <Route path='/' element={
+            <Mercur
+              overview={overview}
+              structure={strucrute}
+              surface={surface}
+              surfaceTxt={surfaceTxt}
+              setOverview={setOverview}
+              setStructure={setStrucrute}
+              setSurface={setSurface}
+              setSurfaceTxt={setSurfaceTxt}
+            />}
+          />
+          <Route path='/venus' element={<Venus overview={overview} structure={strucrute} surface={surface} surfaceTxt={surfaceTxt} />} />
+          <Route path='/earth' element={<Earth overview={overview} structure={strucrute} surface={surface} surfaceTxt={surfaceTxt} />} />
+          <Route path='/marth' element={<Marth overview={overview} structure={strucrute} surface={surface} surfaceTxt={surfaceTxt} />} />
+          <Route path='/jupiter' element={<Jupert overview={overview} structure={strucrute} surface={surface} surfaceTxt={surfaceTxt} />} />
+          <Route path='/saturn' element={<Saturn overview={overview} structure={strucrute} surface={surface} surfaceTxt={surfaceTxt} />} />
+          <Route path='/uranus' element={<Uran overview={overview} structure={strucrute} surface={surface} surfaceTxt={surfaceTxt} />} />
+          <Route path='/neptune' element={<Neptun overview={overview} structure={strucrute} surface={surface} surfaceTxt={surfaceTxt} />} />
           <Route path='/*' element={<h1>404</h1>} />
         </Routes>
       </Router>

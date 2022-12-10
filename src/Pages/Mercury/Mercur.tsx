@@ -1,9 +1,42 @@
+import { useState } from "react";
 import styled from "styled-components"
 import data from '../../data.json'
 
-export const Mercur = ({ overview, structure, surface, surfaceTxt }: any) => {
+export const Mercur = ({ overview, structure, surface, surfaceTxt, setOverview, setStructure, setSurface, setSurfaceTxt }: {
+    overview: boolean;
+    structure: boolean;
+    surface: boolean;
+    surfaceTxt: boolean;
+    setSurfaceTxt: React.Dispatch<React.SetStateAction<boolean>>;
+    setOverview: React.Dispatch<React.SetStateAction<boolean>>;
+    setStructure: React.Dispatch<React.SetStateAction<boolean>>;
+    setSurface: React.Dispatch<React.SetStateAction<boolean>>;
+
+}) => {
     const Data = data[0]
-    console.log(Data)
+
+
+    // const [active, setActive] = useState<boolean>(false)
+
+    const handleClick = () => {
+        setOverview(true)
+        setStructure(false)
+        setSurface(false)
+        setSurfaceTxt(false)
+    }
+    const handleClick2 = () => {
+        setStructure(true)
+        setOverview(false)
+        setSurface(false)
+        setSurfaceTxt(false)
+    }
+    const handleClick3 = () => {
+        setOverview(true)
+        setSurface(true)
+        setStructure(false)
+        setSurfaceTxt(true)
+    }
+
     return (
         <Container>
             <Wrapper>
@@ -13,18 +46,34 @@ export const Mercur = ({ overview, structure, surface, surfaceTxt }: any) => {
                     {surface && <Img style={{ width: '30px', position: 'absolute', top: '90px' }} src={Data.images.geology} />}
                 </ImgDiv>
                 <Info>
-                    <Name>{Data.name}</Name>
-                    {overview && !surfaceTxt && <Desc>{Data.overview.content}</Desc>}
-                    {structure && <Desc>{Data.structure.content}</Desc>}
-                    {surfaceTxt && <Desc>{Data.geology.content}</Desc>}
+                    <InfoDiv>
+                        <Name>{Data.name}</Name>
+                        {overview && !surfaceTxt && <Desc>{Data.overview.content}</Desc>}
+                        {structure && <Desc>{Data.structure.content}</Desc>}
+                        {surfaceTxt && <Desc>{Data.geology.content}</Desc>}
 
-                    <SourceDiv>
-                        <SrcText>Sourse :</SrcText>
-                        {overview && !surfaceTxt && < Link href={Data.overview.source} target="_blank">Wikipedia</Link>}
-                        {structure && <Link href={Data.structure.source} target="_blank">Wikipedia</Link>}
-                        {surfaceTxt && <Link href={Data.geology.source} target="_blank">Wikipedia</Link>}
-                        <SrcImg src="assets/icon-source.svg" />
-                    </SourceDiv>
+                        <SourceDiv>
+                            <SrcText>Sourse :</SrcText>
+                            {overview && !surfaceTxt && < Link href={Data.overview.source} target="_blank">Wikipedia</Link>}
+                            {structure && <Link href={Data.structure.source} target="_blank">Wikipedia</Link>}
+                            {surfaceTxt && <Link href={Data.geology.source} target="_blank">Wikipedia</Link>}
+                            <SrcImg src="assets/icon-source.svg" />
+                        </SourceDiv>
+                    </InfoDiv>
+                    <Overview>
+                        <OverviewBox onClick={handleClick} style={{ backgroundColor: overview && !surfaceTxt ? '#2D68F0' : 'transparent' }} >
+                            <OverviewNum>01</OverviewNum>
+                            <OverviewTxt>OVERVIEW</OverviewTxt>
+                        </OverviewBox>
+                        <OverviewBox onClick={handleClick2} style={{ backgroundColor: structure ? '#2D68F0' : 'transparent' }}>
+                            <OverviewNum>02</OverviewNum>
+                            <OverviewTxt>INTERNAL STRUCTURE</OverviewTxt>
+                        </OverviewBox>
+                        <OverviewBox onClick={handleClick3} style={{ backgroundColor: surfaceTxt ? '#2D68F0' : 'transparent' }}>
+                            <OverviewNum>03</OverviewNum>
+                            <OverviewTxt>SURFACE GEOLOGY</OverviewTxt>
+                        </OverviewBox>
+                    </Overview>
                 </Info>
             </Wrapper>
             <Details>
@@ -55,6 +104,9 @@ export const Mercur = ({ overview, structure, surface, surfaceTxt }: any) => {
 const Container = styled.div`
     width: 327px;
     margin: auto; 
+    @media screen and (min-width: 700px){
+       width: 665px;
+    }
 `
 const Wrapper = styled.div`
     
@@ -69,13 +121,63 @@ const ImgDiv = styled.div`
 const Img = styled.img`
     width: 111px;
 `
-const Info = styled.div`
+
+const InfoDiv = styled.div`
     margin-top: 95px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    @media screen and (min-width: 700px){
+       width: 339px;
+       align-items: flex-start;
+    }
 `
+
+const Info = styled.div`
+    @media screen and (min-width: 700px){
+       display: flex;
+       justify-content: space-between;
+       align-items: flex-end
+    }
+`
+
+const Overview = styled.div`
+    display: none;
+    @media screen and (min-width: 700px){
+       display: flex;
+       flex-direction: column;
+       width: 281px;
+    }
+`
+const OverviewBox = styled.div`
+    display: flex;
+    align-items: center;
+    border: 1px solid #838391;
+    height: 40px;
+    gap: 15px;
+    padding-left: 20px;
+    margin-bottom: 16px;
+    &:hover{
+        background-color: #38384F;
+    }
+`
+const OverviewNum = styled.p`
+    font-size: 9px;
+    font-family: 'League Spartan';
+    color:#838391;
+    font-weight: 700;
+    letter-spacing: 2px;
+`
+
+const OverviewTxt = styled.p`
+    font-size: 12px;
+    font-family: 'League Spartan';
+    color:white;
+    font-weight: 700;
+    letter-spacing: 1.9px;
+`
+
 
 const Name = styled.h1`
     font-size: 40px;
@@ -120,7 +222,11 @@ const SrcImg = styled.img`
 
 const Details = styled.div`
     margin-top: 28px;
-    
+    margin-bottom: 40px;
+    @media screen and (min-width: 700px){
+       display: flex;
+       justify-content: space-between;
+    }
 `
 const Box = styled.div`
     height: 48px;
@@ -130,6 +236,14 @@ const Box = styled.div`
     justify-content: space-between;
     padding: 0 24px;
     margin-bottom: 8px;
+    @media screen and (min-width: 700px){
+       height: 88px;
+       width: 164px;
+       flex-direction: column;
+       justify-content: center;
+        gap: 4px;
+       align-items: flex-start;
+    }
 `
 const BoxTitle = styled.h1`
     font-size: 8px;
