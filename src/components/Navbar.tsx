@@ -3,9 +3,10 @@ import { Link } from "react-router-dom";
 import { useState } from 'react';
 import { BurgerProps } from "../Interfaces";
 
-export const Navbar = () => {
+export const Navbar = ({ setOverview, setStructure, setSurface, setSurfaceTxt }: any) => {
     const [show, setShow] = useState<boolean>(false)
     const [active, setActive] = useState<number>(1)
+
 
     const numbers = [
         {
@@ -22,12 +23,38 @@ export const Navbar = () => {
         }
     ]
 
+    const handleClick2 = (item: { num: number, name: string }) => {
+        setActive(item.num)
+        if (item.name === 'OVERVIEW') {
+            setOverview(true)
+            setStructure(false)
+            setSurface(false)
+            setSurfaceTxt(false)
+        } else if (item.name === 'STRUCTURE') {
+            setStructure(true)
+            setOverview(false)
+            setSurface(false)
+            setSurfaceTxt(false)
+        } else {
+            setOverview(true)
+            setSurface(true)
+            setStructure(false)
+            setSurfaceTxt(true)
+        }
+    }
+
     const Owerview = numbers.map((item) => {
         return (
+
             <OverViewTxt
                 style={{ color: active === item.num ? 'white' : 'gray', borderBottom: active === item.num ? '3px solid red' : 'none' }}
-                onClick={() => setActive(item.num)}
+                onClick={() => handleClick2(item)}
             >{item.name}</OverViewTxt>
+            // <OverViewTxt
+            //     style={{ color: active === item.num ? 'white' : 'gray', borderBottom: active === item.num ? '3px solid red' : 'none' }}
+            //     onClick={() => setActive(item.num)}
+            // >{item.name}</OverViewTxt>
+
         )
     })
 
@@ -40,7 +67,7 @@ export const Navbar = () => {
             name: 'MERCURY',
             color: '#DEF4FC',
             handleClick: { handleClick },
-            to: '/'
+            to: '/',
         },
         {
             name: 'VENUS',
@@ -106,14 +133,6 @@ export const Navbar = () => {
         <>
             <Wrapper>
                 <Title>The Planets</Title>
-                {/* <div
-                    style={{
-                        height: '2px',
-                        backgroundColor: 'white',
-                        width: '100%',
-                        position: 'absolute',
-                    }}
-                ></div> */}
                 <Links>
                     <LINK to={"/"}>Mercur</LINK>
                     <LINK to={"/venus"}>Vener</LINK>
@@ -211,6 +230,7 @@ const Burger = styled.div`
     width: 100%;
     border: 2px solid red;
     position: absolute;
+    z-index: 10;
     padding-top: 24px;
     background-color: #070724;
     @media screen and (min-width: 700px){

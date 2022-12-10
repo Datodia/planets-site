@@ -14,12 +14,23 @@ import { Navbar } from './components/Navbar'
 
 
 function App() {
+
+  const [overview, setOverview] = useState<boolean>(true)
+  const [strucrute, setStrucrute] = useState<boolean>(false)
+  const [surface, setSurface] = useState<boolean>(false)
+  const [surfaceTxt, setSurfaceTxt] = useState<boolean>(false)
+
   return (
     <Container>
       <Router>
-        <Navbar />
+        <Navbar
+          setOverview={setOverview}
+          setStructure={setStrucrute}
+          setSurface={setSurface}
+          setSurfaceTxt={setSurfaceTxt}
+        />
         <Routes>
-          <Route path='/' element={<Mercur />} />
+          <Route path='/' element={<Mercur overview={overview} structure={strucrute} surface={surface} surfaceTxt={surfaceTxt} />} />
           <Route path='/venus' element={<Venus />} />
           <Route path='/earth' element={<Earth />} />
           <Route path='/marth' element={<Marth />} />
@@ -38,7 +49,7 @@ export default App
 
 
 const Container = styled.div`
-  background-color: #070724;
-  height: 100vh;
-  background-image: url('assets/background-stars.svg')
+  /* background-color: #070724; */
+  /* height: 100vh; */
+  /* background-image: url('assets/background-stars.svg') */
 `

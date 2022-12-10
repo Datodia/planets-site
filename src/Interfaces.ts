@@ -5,4 +5,5 @@ export interface BurgerProps {
     name: string;
     to: string;
     color: string;
+    strct?: 'string'
 }
