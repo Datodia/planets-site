@@ -339,6 +339,6 @@ const BoxResult = styled.h1`
     font-weight: 400;
     color: white;
     @media screen and (min-width: 920px){
-       font-size: 40px;
+       font-size: 35px;
     }
 `
