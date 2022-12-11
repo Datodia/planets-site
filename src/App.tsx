@@ -42,13 +42,90 @@ function App() {
               setSurfaceTxt={setSurfaceTxt}
             />}
           />
-          <Route path='/venus' element={<Venus overview={overview} structure={strucrute} surface={surface} surfaceTxt={surfaceTxt} />} />
-          <Route path='/earth' element={<Earth overview={overview} structure={strucrute} surface={surface} surfaceTxt={surfaceTxt} />} />
-          <Route path='/marth' element={<Marth overview={overview} structure={strucrute} surface={surface} surfaceTxt={surfaceTxt} />} />
-          <Route path='/jupiter' element={<Jupert overview={overview} structure={strucrute} surface={surface} surfaceTxt={surfaceTxt} />} />
-          <Route path='/saturn' element={<Saturn overview={overview} structure={strucrute} surface={surface} surfaceTxt={surfaceTxt} />} />
-          <Route path='/uranus' element={<Uran overview={overview} structure={strucrute} surface={surface} surfaceTxt={surfaceTxt} />} />
-          <Route path='/neptune' element={<Neptun overview={overview} structure={strucrute} surface={surface} surfaceTxt={surfaceTxt} />} />
+          <Route path='/venus' element={
+            <Venus
+              overview={overview}
+              structure={strucrute}
+              surface={surface}
+              surfaceTxt={surfaceTxt}
+              setOverview={setOverview}
+              setStructure={setStrucrute}
+              setSurface={setSurface}
+              setSurfaceTxt={setSurfaceTxt}
+            />}
+          />
+          <Route path='/earth' element={
+            <Earth
+              overview={overview}
+              structure={strucrute}
+              surface={surface}
+              surfaceTxt={surfaceTxt}
+              setOverview={setOverview}
+              setStructure={setStrucrute}
+              setSurface={setSurface}
+              setSurfaceTxt={setSurfaceTxt}
+            />}
+          />
+          <Route path='/marth' element={
+            <Marth
+              overview={overview}
+              structure={strucrute}
+              surface={surface}
+              surfaceTxt={surfaceTxt}
+              setOverview={setOverview}
+              setStructure={setStrucrute}
+              setSurface={setSurface}
+              setSurfaceTxt={setSurfaceTxt}
+            />}
+          />
+          <Route path='/jupiter' element={
+            <Jupert
+              overview={overview}
+              structure={strucrute}
+              surface={surface}
+              surfaceTxt={surfaceTxt}
+              setOverview={setOverview}
+              setStructure={setStrucrute}
+              setSurface={setSurface}
+              setSurfaceTxt={setSurfaceTxt}
+            />}
+          />
+          <Route path='/saturn' element={
+            <Saturn
+              overview={overview}
+              structure={strucrute}
+              surface={surface}
+              surfaceTxt={surfaceTxt}
+              setOverview={setOverview}
+              setStructure={setStrucrute}
+              setSurface={setSurface}
+              setSurfaceTxt={setSurfaceTxt}
+            />}
+          />
+          <Route path='/uranus' element={
+            <Uran
+              overview={overview}
+              structure={strucrute}
+              surface={surface}
+              surfaceTxt={surfaceTxt}
+              setOverview={setOverview}
+              setStructure={setStrucrute}
+              setSurface={setSurface}
+              setSurfaceTxt={setSurfaceTxt}
+            />}
+          />
+          <Route path='/neptune' element={
+            <Neptun
+              overview={overview}
+              structure={strucrute}
+              surface={surface}
+              surfaceTxt={surfaceTxt}
+              setOverview={setOverview}
+              setStructure={setStrucrute}
+              setSurface={setSurface}
+              setSurfaceTxt={setSurfaceTxt}
+            />}
+          />
           <Route path='/*' element={<h1>404</h1>} />
         </Routes>
       </Router>
@@ -60,7 +137,4 @@ export default App
 
 
 const Container = styled.div`
-  /* background-color: #070724; */
-  /* height: 100vh; */
-  /* background-image: url('assets/background-stars.svg') */
 `
