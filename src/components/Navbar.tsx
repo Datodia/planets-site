@@ -34,14 +34,14 @@ export const Navbar = ({ setOverview, setStructure, setSurface, setSurfaceTxt }:
         }
     }
 
-    const handleClick3 = (item: any) => {
+    const handleClick3 = (item: { name: string }) => {
         setActive2(item.name)
     }
 
     const Owerview = numbers.map((item) => {
         return (
             <OverViewTxt
-                style={{ color: active === item.num ? 'white' : 'gray', borderBottom: active === item.num ? '3px solid red' : 'none' }}
+                style={{ color: active === item.num ? 'white' : 'gray', borderBottom: active === item.num ? '3px solid #2D68F0' : 'none' }}
                 onClick={() => handleClick2(item)}
             >{item.name}</OverViewTxt>
         )
@@ -120,17 +120,12 @@ export const Navbar = ({ setOverview, setStructure, setSurface, setSurfaceTxt }:
 
     return (
         <>
+            <Line></Line>
+            {!show && <Line2></Line2>}
+
             <Wrapper>
                 <Title>The Planets</Title>
                 <Links>
-                    {/* <LINK to={"/"}>MERCUR</LINK>
-                    <LINK to={"/venus"}>VENUS</LINK>
-                    <LINK to={"/earth"}>EARTH</LINK>
-                    <LINK to={"/marth"}>MARS</LINK>
-                    <LINK to={"/jupiter"}>JUPITER</LINK>
-                    <LINK to={"/saturn"}>SATURN</LINK>
-                    <LINK to={"/uranus"}>URANUS</LINK>
-                    <LINK to={"/neptune"}>NEPRUNE</LINK> */}
                     {planets.map((item) => {
                         return (
                             <LINK
@@ -155,6 +150,28 @@ export const Navbar = ({ setOverview, setStructure, setSurface, setSurfaceTxt }:
     )
 }
 
+const Line = styled.div`
+    height: 1px;
+    transform: translateY(64px);
+    width: 100%;
+    background-color: #838391;
+    @media screen and (min-width: 700px){
+        transform: translateY(124px);
+    }
+    @media screen and (min-width: 920px){
+        transform: translateY(68px);
+    }
+`
+
+const Line2 = styled.div`
+    height: 1px;
+    transform: translateY(124px);
+    width: 100%;
+    background-color: #838391;
+    @media screen and (min-width: 700px){
+        display: none;
+    }
+`
 
 const Wrapper = styled.div`
     width: 327px;
@@ -163,7 +180,6 @@ const Wrapper = styled.div`
     justify-content: space-between;
     position: relative;
     padding: 16px 0;
-    border-bottom: 1px solid white;
     @media screen and (min-width: 700px){
         width: 665px;
         justify-content: center;
@@ -184,7 +200,6 @@ const Wrapper2 = styled.div`
     align-items: center;
     justify-content: space-between;
     padding: 0 24px;
-    border-bottom: 1px solid white;
     gap: 43px;
     @media screen and (min-width: 700px){
         display: none;
@@ -268,7 +283,6 @@ const BurgLink = styled(Link)`
         align-items: center;
         padding-bottom: 15px;
         text-decoration: none;
-        border-bottom: 1px solid #838391;
         margin: 20px 0;
 `
 const PlanetDiv = styled.div`
