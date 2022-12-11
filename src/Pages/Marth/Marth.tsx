@@ -240,6 +240,7 @@ const Name = styled.h1`
     font-family: 'Antonio';
     font-weight: 400;
     color: white;
+    text-transform: uppercase;
     @media screen and (min-width: 700px){
         font-size: 70px;
     }
