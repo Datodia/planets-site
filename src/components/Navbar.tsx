@@ -12,6 +12,7 @@ export const Navbar = ({ setOverview, setStructure, setSurface, setSurfaceTxt }:
 }) => {
     const [show, setShow] = useState<boolean>(false)
     const [active, setActive] = useState<number>(1)
+    const [active2, setActive2] = useState<string>("MERCURY")
 
     const handleClick2 = (item: { num: number, name: string }) => {
         setActive(item.num)
@@ -31,6 +32,10 @@ export const Navbar = ({ setOverview, setStructure, setSurface, setSurfaceTxt }:
             setStructure(false)
             setSurfaceTxt(true)
         }
+    }
+
+    const handleClick3 = (item: any) => {
+        setActive2(item.name)
     }
 
     const Owerview = numbers.map((item) => {
@@ -118,14 +123,22 @@ export const Navbar = ({ setOverview, setStructure, setSurface, setSurfaceTxt }:
             <Wrapper>
                 <Title>The Planets</Title>
                 <Links>
-                    <LINK to={"/"}>MERCUR</LINK>
+                    {/* <LINK to={"/"}>MERCUR</LINK>
                     <LINK to={"/venus"}>VENUS</LINK>
                     <LINK to={"/earth"}>EARTH</LINK>
                     <LINK to={"/marth"}>MARS</LINK>
                     <LINK to={"/jupiter"}>JUPITER</LINK>
                     <LINK to={"/saturn"}>SATURN</LINK>
                     <LINK to={"/uranus"}>URANUS</LINK>
-                    <LINK to={"/neptune"}>NEPRUNE</LINK>
+                    <LINK to={"/neptune"}>NEPRUNE</LINK> */}
+                    {planets.map((item) => {
+                        return (
+                            <LINK
+                                to={item.to}
+                                style={{ color: active2 === item.name ? 'white' : '', borderTop: active2 === item.name ? `4px solid ${item.color}` : '' }}
+                                onClick={() => { handleClick3(item) }}
+                            >{item.name}</LINK>)
+                    })}
                 </Links>
                 <Button onClick={handleClick}><Img src="assets/icon-hamburger.svg" /></Button>
                 {show ?
@@ -157,10 +170,10 @@ const Wrapper = styled.div`
         align-items: center;
         flex-direction: column;
     }
-    @media screen and (min-width: 1000px){
-        width: 900px;
-        justify-content: space-between;
+    @media screen and (min-width: 920px){
+        width: 910px;
         flex-direction: row;
+        justify-content: space-between;
     }
 `
 const Wrapper2 = styled.div`
@@ -186,6 +199,11 @@ const Links = styled.div`
         display: flex;
         justify-content: space-between;
     }
+    @media screen and (min-width: 920px){
+        width: 665px;
+        align-items: center;
+        margin: 0;
+    }
 `
 
 const LINK = styled(Link)`
@@ -195,7 +213,20 @@ const LINK = styled(Link)`
     color: #838391;
     font-weight: 700;
     text-decoration: none;
-    /* display: none; */
+    border-top: 4px solid transparent;
+    @media screen and (min-width: 700px){
+        height: 25px;
+        margin-top: -25px;
+        padding-top: 20px;
+        letter-spacing: 1.5px;
+    }
+    @media screen and (min-width: 920px){
+        height: 35px;
+        margin-top: -32px;
+        padding-top: 27px;
+        letter-spacing: 1.5px;
+    }
+
 `
 
 const Title = styled.h1`
