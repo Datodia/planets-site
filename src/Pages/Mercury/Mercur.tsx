@@ -1,22 +1,9 @@
-import { useState } from "react";
 import styled from "styled-components"
 import data from '../../data.json'
+import { Props } from "../../Interfaces";
 
-export const Mercur = ({ overview, structure, surface, surfaceTxt, setOverview, setStructure, setSurface, setSurfaceTxt }: {
-    overview: boolean;
-    structure: boolean;
-    surface: boolean;
-    surfaceTxt: boolean;
-    setSurfaceTxt: React.Dispatch<React.SetStateAction<boolean>>;
-    setOverview: React.Dispatch<React.SetStateAction<boolean>>;
-    setStructure: React.Dispatch<React.SetStateAction<boolean>>;
-    setSurface: React.Dispatch<React.SetStateAction<boolean>>;
-
-}) => {
+export const Mercur = ({ overview, structure, surface, surfaceTxt, setOverview, setStructure, setSurface, setSurfaceTxt }: Props) => {
     const Data = data[0]
-
-
-    // const [active, setActive] = useState<boolean>(false)
 
     const handleClick = () => {
         setOverview(true)
@@ -43,7 +30,7 @@ export const Mercur = ({ overview, structure, surface, surfaceTxt, setOverview, 
                 <ImgDiv>
                     {overview && <Img src={Data.images.planet} />}
                     {structure && <Img src={Data.images.internal} />}
-                    {surface && <Img style={{ width: '30px', position: 'absolute', top: '90px' }} src={Data.images.geology} />}
+                    {surface && <ImgGeology src={Data.images.geology} />}
                 </ImgDiv>
                 <Info>
                     <InfoDiv>
@@ -61,18 +48,18 @@ export const Mercur = ({ overview, structure, surface, surfaceTxt, setOverview, 
                         </SourceDiv>
                     </InfoDiv>
                     <Overview>
-                        <OverviewBox onClick={handleClick} style={{ backgroundColor: overview && !surfaceTxt ? '#2D68F0' : 'transparent' }} >
+                        <OverviewBox overview={overview} surfaceTxt={surfaceTxt} onClick={handleClick}  >
                             <OverviewNum>01</OverviewNum>
                             <OverviewTxt>OVERVIEW</OverviewTxt>
                         </OverviewBox>
-                        <OverviewBox onClick={handleClick2} style={{ backgroundColor: structure ? '#2D68F0' : 'transparent' }}>
+                        <OverviewBox2 structure={structure} onClick={handleClick2} >
                             <OverviewNum>02</OverviewNum>
                             <OverviewTxt>INTERNAL STRUCTURE</OverviewTxt>
-                        </OverviewBox>
-                        <OverviewBox onClick={handleClick3} style={{ backgroundColor: surfaceTxt ? '#2D68F0' : 'transparent' }}>
+                        </OverviewBox2>
+                        <OverviewBox3 surfaceTxt={surfaceTxt} onClick={handleClick3} >
                             <OverviewNum>03</OverviewNum>
                             <OverviewTxt>SURFACE GEOLOGY</OverviewTxt>
-                        </OverviewBox>
+                        </OverviewBox3>
                     </Overview>
                 </Info>
             </Wrapper>
@@ -107,8 +94,15 @@ const Container = styled.div`
     @media screen and (min-width: 700px){
        width: 665px;
     }
+    @media screen and (min-width: 920px){
+        width: 910px; 
+    }
 `
 const Wrapper = styled.div`
+ @media screen and (min-width: 920px){
+        display: flex;
+        justify-content: space-between;
+    }
     
 `
 const ImgDiv = styled.div`
@@ -120,6 +114,27 @@ const ImgDiv = styled.div`
 `
 const Img = styled.img`
     width: 111px;
+    @media screen and (min-width: 700px){
+        width: 180px;
+    }
+    @media screen and (min-width: 920px){
+        width: 290px;
+    }
+`
+
+const ImgGeology = styled.img`
+    width: 30px;
+    position: absolute;
+    top: 90px;
+    @media screen and (min-width: 700px){
+        width: 100px;
+        top: 130px;
+    }
+
+    @media screen and (min-width: 920px){
+        width: 150px;
+        top: 310px;
+    }
 `
 
 const InfoDiv = styled.div`
@@ -132,6 +147,9 @@ const InfoDiv = styled.div`
        width: 339px;
        align-items: flex-start;
     }
+    @media screen and (min-width: 920px){
+        width: 350px;
+    }
 `
 
 const Info = styled.div`
@@ -139,6 +157,10 @@ const Info = styled.div`
        display: flex;
        justify-content: space-between;
        align-items: flex-end
+    }
+    @media screen and (min-width: 920px){
+        flex-direction: column;
+        gap: 40px;
     }
 `
 
@@ -149,8 +171,11 @@ const Overview = styled.div`
        flex-direction: column;
        width: 281px;
     }
+    @media screen and (min-width: 920px){
+        width: 350px;
+    }
 `
-const OverviewBox = styled.div`
+const OverviewBox = styled.div <Props | any>`
     display: flex;
     align-items: center;
     border: 1px solid #838391;
@@ -158,16 +183,47 @@ const OverviewBox = styled.div`
     gap: 15px;
     padding-left: 20px;
     margin-bottom: 16px;
+    background-color: ${props => props.overview && !props.surfaceTxt ? '#2d68f0' : 'none'};
     &:hover{
         background-color: #38384F;
     }
 `
+const OverviewBox2 = styled.div <Props | any>`
+    display: flex;
+    align-items: center;
+    border: 1px solid #838391;
+    height: 40px;
+    gap: 15px;
+    padding-left: 20px;
+    margin-bottom: 16px;
+    background-color: ${props => props.structure ? '#2d68f0' : 'none'};
+    &:hover{
+        background-color: #38384F;
+    }
+`
+const OverviewBox3 = styled.div <Props | any>`
+    display: flex;
+    align-items: center;
+    border: 1px solid #838391;
+    height: 40px;
+    gap: 15px;
+    padding-left: 20px;
+    margin-bottom: 16px;
+    background-color: ${props => props.surfaceTxt ? '#2d68f0' : 'none'};
+    &:hover{
+        background-color: #38384F;
+    }
+`
+
 const OverviewNum = styled.p`
     font-size: 9px;
     font-family: 'League Spartan';
     color:#838391;
     font-weight: 700;
     letter-spacing: 2px;
+    @media screen and (min-width: 700px){
+        font-size: 14px;
+    }
 `
 
 const OverviewTxt = styled.p`
@@ -184,6 +240,9 @@ const Name = styled.h1`
     font-family: 'Antonio';
     font-weight: 400;
     color: white;
+    @media screen and (min-width: 700px){
+        font-size: 70px;
+    }
 `
 
 const Desc = styled.p`
@@ -194,6 +253,9 @@ const Desc = styled.p`
     color: white;
     text-align: justify;
     line-height: 179%;
+    @media screen and (min-width: 700px){
+        font-size: 14px;
+    }
 `
 const SourceDiv = styled.div`
     margin-top: 32px;
@@ -208,12 +270,18 @@ const SrcText = styled.p`
     font-family: 'League Spartan';
     font-weight: 400;
     color: white;
+    @media screen and (min-width: 700px){
+        font-size: 14px;
+    }
 `
 const Link = styled.a`
     font-size: 12px;
     font-family: 'League Spartan';
     font-weight: 700;
     color: white;
+    @media screen and (min-width: 700px){
+        font-size: 14px;
+    }
 `
 
 const SrcImg = styled.img`
@@ -226,6 +294,13 @@ const Details = styled.div`
     @media screen and (min-width: 700px){
        display: flex;
        justify-content: space-between;
+    }
+    @media screen and (min-width: 700px){
+       display: flex;
+       justify-content: space-between;
+    }
+    @media screen and (min-width: 920px){
+       margin-top: 60px;
     }
 `
 const Box = styled.div`
@@ -244,16 +319,26 @@ const Box = styled.div`
         gap: 4px;
        align-items: flex-start;
     }
+    @media screen and (min-width: 920px){
+        width: 210px;
+        height: 128px;
+    }
 `
 const BoxTitle = styled.h1`
     font-size: 8px;
     font-family: 'League Spartan';
     font-weight: 700;
     color: #838391;
+    @media screen and (min-width: 920px){
+        font-size: 11px;
+    }
 `
 const BoxResult = styled.h1`
     font-size: 20px;
     font-family: 'Antonio';
     font-weight: 400;
     color: white;
+    @media screen and (min-width: 920px){
+       font-size: 40px;
+    }
 `
