@@ -137,4 +137,5 @@ export default App
 
 
 const Container = styled.div`
+  background-image: url('assets/background-stars.svg');
 `
